@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+
+            <ui:define name="title">
+                <h:outputText
+                    value="#{bundle['rezultat2.tytul']}">
+                </h:outputText>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="form">
+                    <h:outputText escape="false" value= "#{bundle['rezultat2.nie_dodano']}"
+                            rendered="#{managed_produkt.stan==1}"/>
+                    <h:panelGrid columns="2" rendered="#{managed_produkt.stan==0}">
+                        <h:outputLabel value="#{bundle['lista_produktow.producent']}" for="producent"/>
+                        <h:outputText id="producent" value="#{managed_produkt.producent}"/>
+                        <h:outputLabel value="#{bundle['lista_produktow.model']}" for="model"/>
+                        <h:outputText id="model" value="#{managed_produkt.model}"/>
+                        <h:outputLabel value="#{bundle['lista_produktow.rodzaj_paliwa']}" for="rodzaj_paliwa"/>
+                        <h:outputText id="rodzaj_paliwa" value="#{managed_produkt.rodzaj_paliwa}"/>
+                        <h:outputLabel value="#{bundle['lista_produktow.pojemnosc']}" for="pojemnosc"/>
+                        <h:outputText id="pojemnosc" value="#{managed_produkt.pojemnosc}"/>
+                        <h:outputLabel value="#{bundle['lista_produktow.rok_produkcji']}" for="data"/>
+                        <h:outputText id="rok_produkcji" value="#{managed_produkt.rok_produkcji}"/>
+                        <h:outputLabel value="#{bundle['lista_produktow.przebieg']}" for="przebieg"/>
+                        <h:outputText id="przebieg" value="#{managed_produkt.przebieg}"/>
+                        <h:outputLabel value="#{bundle['lista_produktow.cena']}" for="cena"/>
+                        <h:outputText id="cena" value="#{managed_produkt.cena}">
+                            <f:convertNumber binding="#{managed_produkt.number_convert}"
+                                         pattern="####.### z&#322;" />
+                        </h:outputText>             
+                        <h:outputLabel value="#{bundle['lista_produktow.data_zakupu']}" for="data"/>    
+                        <h:outputText id="data" value="#{managed_produkt.data_zakupu}">
+                            <f:convertDateTime pattern="EEEEEEEE, dd-MM-yyyy"/> 
+                        </h:outputText>
+                    </h:panelGrid>
+                    
+                    <h:commandButton id="powrot1"
+                                value="#{bundle['rezultat2.akcja']}"
+                                action="/faces/index1"
+                                rendered="#{managed_produkt.powrot==1}"/>
+                    <h:commandButton id="powrot2"
+                                value="#{bundle['rezultat2.akcja']}"
+                                action="#{managed_produkt.powrot}"
+                                rendered="#{managed_produkt.powrot==0}"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
